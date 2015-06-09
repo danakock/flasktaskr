@@ -55,7 +55,7 @@ def tasks():
 	open_tasks = db.session.query(Task) \
 		.filter_by(status='1').order_by(Task.due_date.asc())
 	
-	closed_taskes = db.session.query(Task) \
+	closed_tasks = db.session.query(Task) \
 		.filter_by(status='0').order_by(Task.due_date.asc())
 	
 	return render_template(
