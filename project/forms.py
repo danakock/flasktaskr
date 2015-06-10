@@ -1,7 +1,7 @@
 # project/forms.py
 from flask_wtf import Form
 from wtforms import StringField, DateField, IntegerField, \
-	SelectField
+	SelectField, PasswordField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 class AddTaskForm(Form):
@@ -16,7 +16,7 @@ class AddTaskForm(Form):
 		validators=[DataRequired()],
 		choices=[
 			('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'),
-			('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), '10', '10')
+			('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'), ('10', '10')
 		]
 	)
 	status = IntegerField('Status')
@@ -24,6 +24,10 @@ class AddTaskForm(Form):
 class RegisterForm(Form):
 	name = StringField(
 		'Username',
+		validators=[DataRequired(), Length(min=6, max=40)]
+		)
+	email = StringField(
+		'Email',
 		validators=[DataRequired(), Length(min=6, max=40)]
 		)
 	password = PasswordField(
