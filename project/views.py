@@ -43,6 +43,7 @@ def login():
 			if user is not None and user.password == \
 				request.form['password']:
 					session['logged_in'] = True
+					session['user_id'] = user.id
 					flash('Welcome!')
 					return redirect(url_for('tasks'))
 			else:
@@ -78,6 +79,8 @@ def new_task():
 				form.name.data,
 				form.due_date.data,
 				form.priority.data,
+				datetime.datetime.utcnow(),
+				'1',
 				'1'
 			)
 			db.session.add(new_task)
