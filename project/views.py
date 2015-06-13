@@ -39,6 +39,12 @@ def login_required(test):
             return redirect(url_for('login'))
     return wrap
 
+def flash_errors(form):
+	for field, errors in form.errors.items():
+		for error in errors:
+			flash(u"Error in the %s field - %s" % ( 
+				getattr(form, field).label.text, error), 'error')
+
 
 ########################
 #### route handlers ####
@@ -123,9 +129,8 @@ def new_task():
             flash('New entry was successfully posted. Thanks.')
             return redirect(url_for('tasks'))
         else:
-            flash('All fields are required.')
-            return redirect(url_for('tasks'))
-    return render_template('tasks.html', form=form)
+            return render_template('tasks.html', form=form, error=error)
+    return render_template('tasks.html', form=form, error=error)
 
 
 @app.route('/complete/<int:task_id>/')
@@ -145,3 +150,6 @@ def delete_entry(task_id):
     db.session.query(Task).filter_by(task_id=new_id).delete()
     db.session.commit()
     flash('The task was deleted. Why not add a new one?')
+    return redirect(url_for('tasks'))
+
+
