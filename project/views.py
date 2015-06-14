@@ -11,6 +11,7 @@ import datetime
 from functools import wraps
 from flask import Flask, flash, redirect, render_template, \
     request, session, url_for
+from sqlalchemy.exc import IntegrityError
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
@@ -44,6 +45,14 @@ def flash_errors(form):
 		for error in errors:
 			flash(u"Error in the %s field - %s" % ( 
 				getattr(form, field).label.text, error), 'error')
+
+def open_tasks():
+	return db.session.query(Task).filter_by(
+		status='1').order_by(Task.due_date.asc())
+
+def closed_tasks():
+	return db.session.query(Task).filter_by(
+		status='0').order_by(Task.due_date.asc())
 
 
 ########################
@@ -98,15 +107,11 @@ def register():
 @app.route('/tasks/')
 @login_required
 def tasks():
-    open_tasks = db.session.query(Task) \
-        .filter_by(status='1').order_by(Task.due_date.asc())
-    closed_tasks = db.session.query(Task) \
-        .filter_by(status='0').order_by(Task.due_date.asc())
     return render_template(
         'tasks.html',
         form=AddTaskForm(request.form),
-        open_tasks=open_tasks,
-        closed_tasks=closed_tasks
+        open_tasks=open_tasks(),
+        closed_tasks=closed_tasks()
     )
 
 
@@ -128,9 +133,13 @@ def new_task():
             db.session.commit()
             flash('New entry was successfully posted. Thanks.')
             return redirect(url_for('tasks'))
-        else:
-            return render_template('tasks.html', form=form, error=error)
-    return render_template('tasks.html', form=form, error=error)
+    return render_template(
+    	'tasks.html', 
+    	form=form, 
+    	error=error,
+    	open_tasks=open_tasks(),
+    	closed_tasks=closed_tasks()
+    	)
 
 
 @app.route('/complete/<int:task_id>/')
