@@ -11,7 +11,7 @@
 				<span class="error">
 				{% for error in form.name.errors %}
 					{{ error }}
-				{{% endfor %}}
+				{% endfor %}
 				</span>
 			{% endif %}
 		</p>
@@ -21,7 +21,7 @@
 				<span class="error">
 				{% for error in form.email.errors %}
 					{{ error }}
-				{{% endfor %}}
+				{% endfor %}
 				</span>
 			{% endif %}
 		</p>
@@ -31,7 +31,7 @@
 				<span class="error">
 				{% for error in form.password.errors %}
 					{{ error }}
-				{{% endfor %}}
+				{% endfor %}
 				</span>
 			{% endif %}
 		</p>
@@ -41,7 +41,7 @@
 				<span class="error">
 				{% for error in form.confirm.errors %}
 					{{ error }}
-				{{% endfor %}}
+				{% endfor %}
 				</span>
 			{% endif %}
 		</p>
