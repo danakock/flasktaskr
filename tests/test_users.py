@@ -1,12 +1,11 @@
-# project/test_users.py
 
 
 import os
 import unittest
 
-from views import app, db
-from _config import basedir
-from models import User
+from project import app, db
+from project._config import basedir
+from project.models import Task, User
 
 TEST_DB = 'test.db'
 
@@ -177,6 +176,7 @@ class UsersTests(unittest.TestCase):
         db.session.commit()
 
         users = db.session.query(User).all()
+        print users
         for user in users:
             self.assertEqual(user.role, 'user')
 
