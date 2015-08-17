@@ -1,15 +1,27 @@
+# specify language
 language:
 - python
+
+# specify python version(s)
 python:
 - '2.7'
+- '3.4'
+
+# install dependencies
 install:
 - pip install -r requirements.txt
+
+# run tests
 script:
 - nosetests
+
+# deploy!
 deploy:
   provider: heroku
   api_key:
-    secure: bPk7Y6AvTIvNUCn1kTTcgiSOmmQYRCTQZGJ1NwEJXGhhGpMi9wX6meP7e/cuD+W9uBITIvAi5BzKN5741++z9jQuI0ajAlEKIBmJCexjqQYhZWjkaiEQ40SOUHDBRkUwjUJfgKF6hLzfHL5iQphH+1wSyiVbtsh/sB8N+NUa6meCaqywiBbhVXxBcHqPmpQok3KywpkzyTPOHVyHc1ZC3/RSvydwVY05cBhvbHEcMduVr3Kcsa4MZg+Nr2Dtmqbq2cIDLEbkiC+LvoeAShOrxnJo+VIu7P8Qt+lCuXiAncnQqRbx8EGhLzdue19DM3A5dlIhmevPyC383g7j5Ml4vNaQ0249u5vi/b0TQuAbpGJcnmUQjv8sIRWLJ/7Vrn7YIGzomBoRVsX8Q+ON6J39QYsvOikX1nlqDu71I/IKtWjiXgjcYp852m0HwsqAuUVo5ZAGYO3hmdjH+rNXXpFzNzVbZysJSGOthqi1hGRRTrAyBoR6o3eYUGCXRgCM0qtQp+UgzFlsrKXAI46crdmDxnWGdv1GKmAvmTakx9zu+2cNz2zvasamvQb6wJwgBBI+yImitv33G6BsV7zBax4k9o7VVVooqJPRgnMqC2SI511Vh7poBOYdpxP/WTGCAb7Q9Lv18cyV2vGA/teYA33Hh+KjbOBprX44352Zhp680Jw=
-  app: tim-chesterfield-5681
+    secure: fF/+WdMxK3sDpKKkoiwxbEWFn5tFC5XfDewycHkQsLvGfEYejyQdtf+/nMyD3gbCifBj6CSTT42jYwEpjopMGZrvrwiVFm7VftGjsVl72YDT6NUdp+ozixKCTSdQOPXiWPLtunDYl7hcV5Hgm9Y8cS8nuYvgHO7mH0GkWBsr+sGPeziTfLnDUU0iItmQG2t7sVTDUHm0fwXCa3cyN7rNmRruj9oOAlbsHNXUPit4T8RNEzoiwFTjYFJdxpJE9YdieTho7IRgG9D4PRQPKTzHPWQrzCo9sFbCtgn3tWWUdIJlPXZwmszdLeb7Hl8Y6gW0UyVUQNkdBFrNCJZcqvTSkz0VcT1EO11Uj/1F1f2UVi6od1fnT0cdhlwqgqwEVzrumQpkbl0kPoOfPRSwXHNDkYO2c6dBzsDQceOsgMzC/qfU34m6VLqZmIh0BDPBUs78cLIzXASrIzVC0JOQod+1g8WGoCyOypqw3yt8854LSNUTGZsrEdZtdeYAs/erC+LQtzkHsVVIrku7GWEsSnikPHfGDCm39au5Nq4+wG+Z3ymTVMNmvX9nFiypRlIRyNkiT727XlGR/dx5+hqoFvXzKU4BLIk0+49ViKYO8nw30pIeyIwrM0ikbVr+vJXB6hyZ8AMOXc3WkUE2FoebBHKKWji4RTQ2dtk3f5D3byl2qaA=
+  app: flasktaskr
   on:
+    branch: master
+    python: '3.4'
     repo: danakock/flasktaskr
